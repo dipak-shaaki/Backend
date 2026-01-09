@@ -1,7 +1,6 @@
+const userService = require('../../service/user');
+const { verifyPassword } = require('../../utils/auth');
 
-
-const userService = require('../../service/user')
-console.log('userService exports:', Object.keys(userService));
 
 
 const signupController = async (req, res) => {
@@ -25,10 +24,8 @@ const signupController = async (req, res) => {
 }
 
 const loginController = async (req, res) => {
-
-    const { email, password } = req.body;
     try {
-       
+        const { email, password } = req.body;
         const user = await userService.loginUser(email, password);
         return res.status(200).json({
             success: true,
@@ -43,8 +40,7 @@ const loginController = async (req, res) => {
             message: error.message || 'Internal Server Error'
         });
     }
-
-}
+};
 
 module.exports = {
     signupController,

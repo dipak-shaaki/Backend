@@ -1,20 +1,22 @@
 const User = require('../../model/user');
-const bycrypt = require('bcryptjs')
+const bycrypt = require('bcryptjs');
+const { encryptPassword } = require('../../utils/auth');
 
 const createUser = async (userData) => {
     try {
-        const salt = await bycrypt.genSalt(10);
-        const hashedPassword = await bycrypt.hash(userData.password, salt);
-        userData.password = hashedPassword;
-        const created = await User.create(userData);
-        const userJson = created.toJSON();
-        const { password, ...userWithoutPassword } = userJson;
+    //    userData.password = await bycrypt.hash(userData.password);
+    const created =(await User.create({
+        ...userData, password:await encryptPassword(userData.password)})).toJSON();
+       
+        // const created = await User.create(userData);
+        // const userJson = created.toJSON();
+        // const { password, ...userWithoutPassword } = userJson;
         return userWithoutPassword;
     } catch (error) {
-        let message = error.message;
-        if (error.errors && Array.isArray(error.errors)) {
-            message = error.errors.map(e => e.message).join('; ');
-        }
+        // let message = error.message;
+        // if (error.errors && Array.isArray(error.errors)) {
+        //     message = error.errors.map(e => e.message).join('; ');
+        // }
         throw new Error('Error creating user: ' + message);
     }
 };
@@ -42,6 +44,21 @@ const loginUser = async (email, password) => {
         throw new Error(error.message || 'Error logging in');
     }
 }
+
+const getUserByEmail = async (email) => {
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return null;
+        }
+        return user;
+
+    } catch (error) {
+        console.log("error fetching email ", error);
+    }
+};
+
+
 module.exports = {
     createUser,
     loginUser,
