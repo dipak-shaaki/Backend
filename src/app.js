@@ -3,6 +3,7 @@ import sequelize from './config/db.js';
 import authRoute from './routes/auth/index.js';
 import cookieParser from 'cookie-parser';
 import errorMiddleware from './middlewares/errorMiddleware.js';
+import { isCustomer, isProtectedRoute,isVendor } from './middlewares/auth.js';
 const app = express();
 
 app.use(express.json());
@@ -26,9 +27,16 @@ sequelize.authenticate()
 
 app.use('/auth', authRoute);
 
+app.use(isProtectedRoute);
+app.use(isCustomer);
+app.use(isVendor);
+
+
 app.get('/test', (req, res) => {
   res.send('API is working');
 });
+
+
 
 app.use(errorMiddleware);
 
