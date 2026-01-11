@@ -1,5 +1,5 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
+import 'dotenv/config';
+import { Sequelize } from 'sequelize';
 
 const db_uri = process.env.DB_URI;
 
@@ -12,4 +12,4 @@ const sequelize = new Sequelize(db_uri, {
   logging: false, // Turn off SQL logs in terminal
 });
 
-module.exports = sequelize;
+export default sequelize;
