@@ -1,15 +1,10 @@
-import 'dotenv/config';
-import { Sequelize } from 'sequelize';
+import Sequelize from 'sequelize'
+import dotenv from 'dotenv'
+dotenv.config()
+const db_uri = process.env.DB_URI
 
-const db_uri = process.env.DB_URI;
 
-if (!db_uri) {
-  throw new Error('DB_URI is missing from .env file');
-}
-
-const sequelize = new Sequelize(db_uri, {
-  dialect: 'postgres',
-  logging: false, // Turn off SQL logs in terminal
-});
+const sequelize = new Sequelize(db_uri, { dialect: 'postgres' })
+export { sequelize }
 
 export default sequelize;

@@ -1,16 +1,16 @@
-import Products from '../../model/products/';
+import Products from '../../model/products.js';
 
-const createProduct = async (productData, vendorId) => {
+const createProduct = async (productData, vendorsid) => {
     try {
         const product = await Products.create({
-          ...productData,
-          vendorId
-        }); 
-        
+            ...productData,
+            vendorsid
+        });
+
         return product;
     } catch (error) {
         throw new Error('Error creating product: ' + error.message);
     }
 };
 
-export { createProduct };
+export default createProduct ;

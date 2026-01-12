@@ -1,6 +1,5 @@
-import sequelize from "../config/db.js";
-
 import { DataTypes } from "sequelize";
+import sequelize from "../config/db.js";
 
 const Products = sequelize.define(
     'products',
@@ -10,33 +9,28 @@ const Products = sequelize.define(
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-        vendorsId: {
+
+        vendorsid: {
             type: DataTypes.UUID,
             allowNull: false,
-            //relation with user model (vendor)
-            references: {
-                model: 'users',
-                key: 'id'
-            },
-        },
 
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        categories: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false,
-        },
         description: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
         },
-
+        categories: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            defaultValue: [],
+            allowNull: false,
+        },
         image: {
             type: DataTypes.STRING,
         },
-
         price: {
             type: DataTypes.FLOAT,
             allowNull: false,
@@ -50,8 +44,8 @@ const Products = sequelize.define(
     {
         tableName: 'products',
         timestamps: true,
-        underscored: true,
+        underscored: true
     }
-);
+)
 
 export default Products;
