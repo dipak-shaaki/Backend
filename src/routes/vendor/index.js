@@ -1,9 +1,18 @@
 import express from 'express';
-import {productController}  from '../../controller/products/index.js';
+import { productController, getProductsController, updateProductController, deleteProductController } from '../../controller/products/index.js';
 
+const router = express.Router();
 
-const router = express.Router();  //creating a mini app
+// Create a product
+router.post('/products', productController);
 
-router.post('/products', productController)
+// Get all products for vendor
+router.get('/products', getProductsController);
+
+// Update a product by ID
+router.put('/products/:id', updateProductController);
+
+// Delete a product by ID
+router.delete('/products/:id', deleteProductController);
 
 export default router;

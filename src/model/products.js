@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
+import User from "./user.js";
 
 const Products = sequelize.define(
     'products',
@@ -10,10 +11,13 @@ const Products = sequelize.define(
             primaryKey: true,
         },
 
-        vendorsid: {
+        vendorsId: {
             type: DataTypes.UUID,
             allowNull: false,
-
+            references: {
+                model: User,
+                key: 'id'
+            }
         },
         name: {
             type: DataTypes.STRING,
