@@ -16,6 +16,9 @@ const signupController = async (req, res, next) => {
         return next(httpError('User with this email already exists', 400))
     }
     const user = await createUser({ name, email, password, type })
+    if (!user) {
+        return next(httpError('Failed to create user', 500))
+    }
     res.status(200).json({ success: true, message: 'User Signed Up', data: user })
 }
 
@@ -30,6 +33,7 @@ const loginController = async (req, res, next) => {
     }
 
     const user = await getUserByEmail(email)
+    console.log('User found:', !!user)
     if (!user) {
         return next(httpError('User not found', 404))
     }

@@ -8,3 +8,14 @@ sign up
 "password": "Password123",
 "type": "customer"
 }
+
+
+{"name":"Test User","email":"test@example.com","password":"Password123","type":"user"}
+
+
+middleare banune tesma req.body->valid huna paryo
+
+
+list get ->/vendors/products
+update
+delete
