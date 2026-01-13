@@ -29,12 +29,29 @@ const productController = async (req, res, next) => {
 // Get all products for a vendor
 const getProductsController = async (req, res, next) => {
     try {
-        const products = await getProductsByVendor(req.user.id);
+
+        const page = parseInt(req.query.page) || 1; // Default to page 1
+        const limit = parseInt(req.query.limit) || 10; // Default to 10 items per page
+        const offset = (page - 1) * limit;
+                           
+        if (page < 1 || limit < 1 || limit > 100) {
+            return next(httpError("Invalid pagination parameters. Page must be >= 1, limit must be 1-100", 400));
+        }
+
+        const result = await getProductsByVendor(req.user.id, limit, offset);
 
         res.status(200).json({
             success: true,
             message: "Products fetched successfully",
-            data: products
+            data: result.products,
+            pagination: {
+                currentPage: page,
+                totalPages: Math.ceil(result.totalCount / limit),
+                totalItems: result.totalCount,
+                itemsPerPage: limit,
+                hasNextPage: page * limit < result.totalCount,
+                hasPrevPage: page > 1
+            }
         });
     } catch (error) {
         next(error);
@@ -47,7 +64,7 @@ const updateProductController = async (req, res, next) => {
         const { id } = req.params;
         const updateData = req.body;
 
-        
+
         if (Object.keys(updateData).length === 0) {
             return next(httpError("Provide at least one field to update", 400));
         }

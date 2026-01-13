@@ -13,19 +13,32 @@ const createProduct = async (productData, vendorsId) => {
     }
 };
 
-// Get all products for a specific vendor
-const getProductsByVendor = async (vendorsId) => {
+// Get all products for a specific vendor with pagination
+const getProductsByVendor = async (vendorsId, limit = 10, offset = 0) => {
     try {
-        const products = await Products.findAll({
+    
+        const totalCount = await Products.count({
             where: { vendorsId }
         });
-        return products;
+
+        // Get paginated products
+        const products = await Products.findAll({
+            where: { vendorsId },
+            limit: limit,
+            offset: offset,
+            order: [['createdAt', 'DESC']] 
+        });
+
+        return {
+            products,
+            totalCount
+        };
     } catch (error) {
         throw new Error('Error fetching products: ' + error.message);
     }
 };
 
-// Update a product (only if owned by the vendor)
+// Update a product
 const updateProduct = async (productId, vendorsId, updateData) => {
     try {
         const product = await Products.findOne({
@@ -43,7 +56,7 @@ const updateProduct = async (productId, vendorsId, updateData) => {
     }
 };
 
-// Delete a product (only if owned by the vendor)
+// Delete a product 
 const deleteProduct = async (productId, vendorsId) => {
     try {
         const product = await Products.findOne({

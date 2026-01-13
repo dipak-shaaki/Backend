@@ -111,8 +111,19 @@ Most endpoints require authentication via JWT token stored in cookies.
 ```
 
 ### GET /vendor/products
-**Description:** Get all products for the authenticated vendor  
+**Description:** Get all products for the authenticated vendor with pagination  
 **Authentication:** Required (JWT token in cookies)
+
+**Query Parameters:**
+- `page` (optional): Page number (default: 1, minimum: 1)
+- `limit` (optional): Number of items per page (default: 10, maximum: 100)
+
+**Example Requests:**
+```
+GET /vendor/products?page=1&limit=5
+GET /vendor/products?page=2&limit=20
+GET /vendor/products (uses defaults: page=1, limit=10)
+```
 
 **Success Response (200):**
 ```json
@@ -121,17 +132,33 @@ Most endpoints require authentication via JWT token stored in cookies.
   "message": "Products fetched successfully",
   "data": [
     {
-      "id": 1,
-      "name": "iPhone 15 Pro",
-      "description": "Latest iPhone with advanced features",
-      "price": 999.99,
-      "categories": ["electronics", "smartphones"],
-      "image": "https://example.com/iphone15.jpg",
-      "vendorId": 1
+      "id": "uuid",
+      "name": "Product Name",
+      "description": "Product description",
+      "price": 99.99,
+      "categories": ["electronics"],
+      "image": "https://example.com/image.jpg",
+      "vendorsId": "uuid",
+      "createdAt": "2024-01-13T10:00:00.000Z",
+      "updatedAt": "2024-01-13T10:00:00.000Z"
     }
-  ]
+  ],
+  "pagination": {
+    "currentPage": 1,
+    "totalPages": 5,
+    "totalItems": 47,
+    "itemsPerPage": 10,
+    "hasNextPage": true,
+    "hasPrevPage": false
+  }
 }
 ```
+
+**Pagination Details:**
+- Products are ordered by creation date (newest first)
+- Maximum limit is 100 items per page
+- Page numbering starts from 1
+- Invalid pagination parameters return 400 error
 
 ### PUT /vendor/products/:id
 **Description:** Update a product by ID  
@@ -202,3 +229,5 @@ Most endpoints require authentication via JWT token stored in cookies.
 3. **View products** using GET /vendor/products
 4. **Update products** using PUT /vendor/products/:id
 5. **Delete products** using DELETE /vendor/products/:id
+
+
