@@ -47,7 +47,7 @@ const updateProductController = async (req, res, next) => {
         const { id } = req.params;
         const updateData = req.body;
 
-        // Validation: At least one field to update
+        
         if (Object.keys(updateData).length === 0) {
             return next(httpError("Provide at least one field to update", 400));
         }

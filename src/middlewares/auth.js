@@ -4,7 +4,7 @@ import { verifyJWTToken } from '../utils/auth.js';
 
 const isProtectedRoute = (req, res, next) => {
 
-    const { token } = req.cookies;
+    const { token } = req.cookies; //destructuring from cookies
 
     if (!token) {
         throw httpError('Unauthorized access. Please log in.', 403);

@@ -1,0 +1,993 @@
+{
+    "info": {
+        "name": "E-commerce API Tests",
+        "description": "Complete Postman collection for testing the e-commerce API endpoints",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Health Check",
+            "item": [
+                {
+                    "name": "GET / - Root Endpoint",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "/"
+                            ]
+                        },
+                        "description": "Basic health check endpoint to verify server is running"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "POST /auth/signup - User Registration Sample 1",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"type\": \"vendor\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/signup",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "signup"
+                            ]
+                        },
+                        "description": "Register a new vendor user"
+                    }
+                },
+                {
+                    "name": "POST /auth/signup - User Registration Sample 2",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane@example.com\",\n  \"password\": \"securepass456\",\n  \"type\": \"vendor\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/signup",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "signup"
+                            ]
+                        },
+                        "description": "Register another vendor user"
+                    }
+                },
+                {
+                    "name": "POST /auth/signup - User Registration Sample 3",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Bob Wilson\",\n  \"email\": \"bob@example.com\",\n  \"password\": \"mypassword789\",\n  \"type\": \"vendor\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/signup",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "signup"
+                            ]
+                        },
+                        "description": "Register a third vendor user"
+                    }
+                },
+                {
+                    "name": "POST /auth/login - User Login Sample 1",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Login with first user - this sets the authentication cookie"
+                    }
+                },
+                {
+                    "name": "POST /auth/login - User Login Sample 2",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"securepass456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Login with second user"
+                    }
+                },
+                {
+                    "name": "POST /auth/login - User Login Sample 3",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"bob@example.com\",\n  \"password\": \"mypassword789\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Login with third user"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Products Management",
+            "item": [
+                {
+                    "name": "POST /vendor/products - Create Product Sample 1",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"iPhone 15 Pro\",\n  \"description\": \"Latest iPhone with advanced features\",\n  \"price\": 999.99,\n  \"categories\": [\"electronics\", \"smartphones\"],\n  \"image\": \"https://example.com/iphone15.jpg\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products"
+                            ]
+                        },
+                        "description": "Create a new smartphone product (requires authentication)"
+                    }
+                },
+                {
+                    "name": "POST /vendor/products - Create Product Sample 2",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"MacBook Pro 16-inch\",\n  \"description\": \"Powerful laptop for professionals\",\n  \"price\": 2499.99,\n  \"categories\": [\"electronics\", \"laptops\"],\n  \"image\": \"https://example.com/macbook.jpg\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products"
+                            ]
+                        },
+                        "description": "Create a laptop product"
+                    }
+                },
+                {
+                    "name": "POST /vendor/products - Create Product Sample 3",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality wireless headphones with noise cancellation\",\n  \"price\": 299.99,\n  \"categories\": [\"electronics\", \"audio\"],\n  \"image\": \"https://example.com/headphones.jpg\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products"
+                            ]
+                        },
+                        "description": "Create an audio product"
+                    }
+                },
+                {
+                    "name": "GET /vendor/products - Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products"
+                            ]
+                        },
+                        "description": "Retrieve all products for the authenticated vendor"
+                    }
+                },
+                {
+                    "name": "PUT /vendor/products/:id - Update Product Sample 1",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"iPhone 15 Pro Max\",\n  \"price\": 1199.99,\n  \"description\": \"Updated iPhone with larger screen and better camera\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id}}"
+                            ]
+                        },
+                        "description": "Update product name, price and description"
+                    }
+                },
+                {
+                    "name": "PUT /vendor/products/:id - Update Product Sample 2",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"price\": 2299.99,\n  \"categories\": [\"electronics\", \"laptops\", \"professional\", \"apple\"]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id_2}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id_2}}"
+                            ]
+                        },
+                        "description": "Update only price and categories"
+                    }
+                },
+                {
+                    "name": "PUT /vendor/products/:id - Update Product Sample 3",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Premium Wireless Headphones\",\n  \"description\": \"Premium wireless headphones with active noise cancellation and premium sound quality\",\n  \"image\": \"https://example.com/premium-headphones.jpg\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id_3}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id_3}}"
+                            ]
+                        },
+                        "description": "Update name, description and image"
+                    }
+                },
+                {
+                    "name": "DELETE /vendor/products/:id - Delete Product Sample 1",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id}}"
+                            ]
+                        },
+                        "description": "Delete the first product"
+                    }
+                },
+                {
+                    "name": "DELETE /vendor/products/:id - Delete Product Sample 2",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id_2}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id_2}}"
+                            ]
+                        },
+                        "description": "Delete the second product"
+                    }
+                },
+                {
+                    "name": "DELETE /vendor/products/:id - Delete Product Sample 3",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id_3}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id_3}}"
+                            ]
+                        },
+                        "description": "Delete the third product"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Error Testing",
+            "item": [
+                {
+                    "name": "Signup - Missing Required Fields",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Test User\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/signup",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "signup"
+                            ]
+                        },
+                        "description": "Test error handling for missing email and password"
+                    }
+                },
+                {
+                    "name": "Login - Invalid Credentials",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"wrongpassword\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Test error handling for invalid password"
+                    }
+                },
+                {
+                    "name": "Create Product - Missing Required Fields",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"description\": \"Product without name and price\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products"
+                            ]
+                        },
+                        "description": "Test error handling for missing name and price (requires auth)"
+                    }
+                },
+                {
+                    "name": "Update Product - Empty Body",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/{{product_id}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "{{product_id}}"
+                            ]
+                        },
+                        "description": "Test error handling for empty update body (requires auth)"
+                    }
+                },
+                {
+                    "name": "Delete Product - Non-existent ID",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/vendor/products/99999",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "vendor",
+                                "products",
+                                "99999"
+                            ]
+                        },
+                        "description": "Test error handling for non-existent product ID (requires auth)"
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3000",
+            "type": "string",
+            "description": "Base URL for the API server"
+        },
+        {
+            "key": "product_id",
+            "value": "1",
+            "type": "string",
+            "description": "ID of the first created product - update this after creating products"
+        },
+        {
+            "key": "product_id_2",
+            "value": "2",
+            "type": "string",
+            "description": "ID of the second created product"
+        },
+        {
+            "key": "product_id_3",
+            "value": "3",
+            "type": "string",
+            "description": "ID of the third created product"
+        }
+    ]
+}
+                {
+    "name": "User Signup - Sample 2",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane@example.com\",\n  \"password\": \"securepass456\",\n  \"type\": \"vendor\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/auth/signup",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "auth",
+                "signup"
+            ]
+        }
+    }
+},
+{
+    "name": "User Signup - Sample 3",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Bob Wilson\",\n  \"email\": \"bob@example.com\",\n  \"password\": \"mypassword789\",\n  \"type\": \"vendor\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/auth/signup",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "auth",
+                "signup"
+            ]
+        }
+    }
+},
+{
+    "name": "User Login - Sample 1",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/auth/login",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "auth",
+                "login"
+            ]
+        }
+    }
+},
+{
+    "name": "User Login - Sample 2",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"securepass456\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/auth/login",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "auth",
+                "login"
+            ]
+        }
+    }
+},
+{
+    "name": "User Login - Sample 3",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"bob@example.com\",\n  \"password\": \"mypassword789\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/auth/login",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "auth",
+                "login"
+            ]
+        }
+    }
+}
+]
+},
+{
+"name": "Products",
+"item": [
+{
+    "name": "Add Product - Sample 1",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"iPhone 15 Pro\",\n  \"description\": \"Latest iPhone with advanced features\",\n  \"price\": 999.99,\n  \"categories\": [\"electronics\", \"smartphones\"],\n  \"image\": \"https://example.com/iphone15.jpg\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products"
+            ]
+        }
+    }
+},
+{
+    "name": "Add Product - Sample 2",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"MacBook Pro 16-inch\",\n  \"description\": \"Powerful laptop for professionals\",\n  \"price\": 2499.99,\n  \"categories\": [\"electronics\", \"laptops\"],\n  \"image\": \"https://example.com/macbook.jpg\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products"
+            ]
+        }
+    }
+},
+{
+    "name": "Add Product - Sample 3",
+    "request": {
+        "method": "POST",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Wireless Headphones\",\n  \"description\": \"High-quality wireless headphones with noise cancellation\",\n  \"price\": 299.99,\n  \"categories\": [\"electronics\", \"audio\"],\n  \"image\": \"https://example.com/headphones.jpg\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products"
+            ]
+        }
+    }
+},
+{
+    "name": "Get All Products",
+    "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+            "raw": "{{base_url}}/vendor/products",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products"
+            ]
+        }
+    }
+},
+{
+    "name": "Update Product - Sample 1",
+    "request": {
+        "method": "PUT",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"iPhone 15 Pro Max\",\n  \"price\": 1199.99,\n  \"description\": \"Updated iPhone with larger screen\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id}}"
+            ]
+        }
+    }
+},
+{
+    "name": "Update Product - Sample 2",
+    "request": {
+        "method": "PUT",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"price\": 2299.99,\n  \"categories\": [\"electronics\", \"laptops\", \"professional\"]\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id_2}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id_2}}"
+            ]
+        }
+    }
+},
+{
+    "name": "Update Product - Sample 3",
+    "request": {
+        "method": "PUT",
+        "header": [
+            {
+                "key": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Premium Wireless Headphones\",\n  \"description\": \"Premium wireless headphones with active noise cancellation and premium sound quality\"\n}"
+        },
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id_3}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id_3}}"
+            ]
+        }
+    }
+},
+{
+    "name": "Delete Product - Sample 1",
+    "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id}}"
+            ]
+        }
+    }
+},
+{
+    "name": "Delete Product - Sample 2",
+    "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id_2}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id_2}}"
+            ]
+        }
+    }
+},
+{
+    "name": "Delete Product - Sample 3",
+    "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+            "raw": "{{base_url}}/vendor/products/{{product_id_3}}",
+            "host": [
+                "{{base_url}}"
+            ],
+            "path": [
+                "vendor",
+                "products",
+                "{{product_id_3}}"
+            ]
+        }
+    }
+}
+]
+}
+],
+"variable": [
+{
+"key": "base_url",
+"value": "http://localhost:3000",
+"type": "string"
+},
+{
+"key": "product_id",
+"value": "1",
+"type": "string"
+},
+{
+"key": "product_id_2",
+"value": "2",
+"type": "string"
+},
+{
+"key": "product_id_3",
+"value": "3",
+"type": "string"
+}
+]
+}

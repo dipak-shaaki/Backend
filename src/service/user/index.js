@@ -4,10 +4,9 @@ import { encryptPassword } from "../../utils/auth.js";
 
 const createUser = async (userData) => {
     try {
-        // userData.password= await encryptPassword(userData.password)
-        // const user=(await User.create(userData)).toJSON();//convert into the normal js objects.
-
-        const user = (await User.create({ ...userData, password: await encryptPassword(userData.password) })).toJSON()
+            // Encrypt password before saving
+        const user = (await User.create({ ...userData, password: await encryptPassword(userData.password) })).toJSON()  // Convert Sequelize instance to plain JS object
+          // Destructure and remove password
         const { password, ...userWithoutPassword } = user //rest operator 
         return userWithoutPassword;
     } catch (error) {
