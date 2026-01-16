@@ -2,6 +2,7 @@ import express from 'express'
 import sequelize from './config/db.js'
 import authRouter from './routes/auth/index.js'
 import vendorRouter from './routes/vendor/index.js'
+import cartRouter from './routes/cart/index.js'
 import errorMiddleware from './middlewares/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
 import { isProtectedRoute, isVendor } from './middlewares/auth.js'
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/cart', cartRouter)
 app.use(isProtectedRoute) //aaba muni ko route ma apply hunxa
 
 app.use('/vendor', isVendor, vendorRouter)

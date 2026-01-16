@@ -52,4 +52,7 @@ const Products = sequelize.define(
     }
 )
 
+// Define associations
+Products.belongsTo(User, { foreignKey: 'vendorsId', as: 'vendor' });
+
 export default Products;
