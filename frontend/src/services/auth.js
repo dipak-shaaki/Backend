@@ -12,7 +12,22 @@ const signIn = async (userData) => {
     throw new Error(data.message || 'Failed to Sign in')
   }
   return data.data
-
 }
 
-export { signIn }
+const signUp = async (userData) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(userData)
+  });
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Failed to Sign up')
+  }
+  return data.data
+}
+
+export { signIn, signUp }

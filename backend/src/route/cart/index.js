@@ -1,11 +1,9 @@
 import express from 'express'
-import { upsertCartController} from '../../controller/cart/index.js'
-const router=express.Router()
-// router.post('/:id',createCartController)
-// router.patch('/:id',updateCartController)
-// router.delete('/:id',deleteCartController)
+import { upsertCartController, getCartController, deleteCartItemController } from '../../controller/cart/index.js'
+const router = express.Router()
 
-
-router.patch('/',upsertCartController)
+router.get('/', getCartController)
+router.patch('/', upsertCartController)
+router.delete('/:id', deleteCartItemController)
 
 export default router

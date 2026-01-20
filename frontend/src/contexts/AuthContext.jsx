@@ -1,34 +1,45 @@
 import { createContext, useContext, useState } from "react";
-import { signIn } from "../services/auth.js";
+import { signIn, signUp } from "../services/auth.js";
 import { useEffect } from "react";
 
-const AuthContext=createContext()
+const AuthContext = createContext()
 
-export const AuthProvider=({children})=>{
-    const[user,setUser]=useState(null)
-   
-    useEffect(()=>{
-        const savedUser=localStorage.getItem('user')
-        if(savedUser) setUser(JSON.parse(savedUser))
-    },[])
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
 
-    const login=async(userData)=>{
-        const data= await signIn(userData)
+    useEffect(() => {
+        const savedUser = localStorage.getItem('user')
+        if (savedUser) setUser(JSON.parse(savedUser))
+    }, [])
+
+    const login = async (userData) => {
+        const data = await signIn(userData)
         setUser(data)
-        localStorage.setItem('user',JSON.stringify(data))
-        console.log('data of the user is:',data)
-         return data
+        localStorage.setItem('user', JSON.stringify(data))
+        console.log('data of the user is:', data)
+        return data
     }
-    const logout=()=>{
-        setUser('')
+
+    const register = async (userData) => {
+        const data = await signUp(userData)
+        // Don't auto-login after signup, let user login manually
+        console.log('User registered:', data)
+        return data
+    }
+
+    const logout = () => {
+        setUser(null)
         localStorage.removeItem('user')
     }
+
     return (
-    <AuthContext.Provider value={{user,login,logout}} >
-     {children}
-    </AuthContext.Provider>
+        <AuthContext.Provider value={{ user, login, register, logout }} >
+            {children}
+        </AuthContext.Provider>
     )
 }
-export const useAuth=()=>{
+
+export const useAuth = () => {
     return useContext(AuthContext)
 }
+
